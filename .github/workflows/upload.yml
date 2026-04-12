@@ -20,9 +20,9 @@ jobs:
         id: creds
         uses: aws-actions/configure-aws-credentials@v6.1.0
         with:
-          role-to-assume: arn:aws:iam::${{vars.AWS_ACCOUNT_ID}}:role/gha-${{ github.event.organization.id }}-${{ github.event.repository.id }}
+          role-to-assume: ${{secrets.AWS_ROLE_ARN}}
           role-session-name: ${{ github.run_id }}-${{ github.job }}-${{ github.run_attempt }}
-          aws-region: ${{ vars.AWS_REGION }}
+          aws-region: ${{ secrets.AWS_REGION }}
           output-credentials: true
           output-env-credentials: false
           role-duration-seconds: 7200
