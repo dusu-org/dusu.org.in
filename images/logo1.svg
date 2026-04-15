@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <defs>
+<!-- Clockwise path for top texts -->
+<path id="textCirclePath"
+      d="M 500,125
+         a 375,375 0 1,1 -0.01,0"
+      fill="none" />
+<path id="reverseTextCirclePath"
+      d="M 500,125
+         a 375,375 0 1,0 0,750
+         a 375,375 0 1,0 0,-750"
+      fill="none" />
+
+    <!-- Star symbol -->
+    <g id="starSymbol">
+      <path d="M0,-20 L5.88,-8.09 L19.02,-6.18 L9.51,4.36 L11.76,16.18 L0,10 L-11.76,16.18 L-9.51,4.36 L-19.02,-6.18 L-5.88,-8.09 Z" />
+    </g>
+    <!-- Styles -->
+    <style>
+      .mainCircles {
+        fill: none;
+        stroke-width: 8;
+      }
+      .centerText {
+        font-family: Arial, sans-serif;
+        font-size: 190px;
+        font-weight: bold;
+        text-anchor: middle;
+        dominant-baseline: central;
+      }
+      .arcText {
+        font-family: 'Noto Sans', 'Noto Sans Devanagari', sans-serif;
+        font-size: 50px;
+        font-weight: 500;
+        text-anchor: middle;
+      }
+      .outercircle, .centerText {
+        fill: #800000;
+        }
+      .innercircle, .arcText, .star {
+fill: #ffffff;
+}
+    </style>
+  </defs>
+  <!-- Outer and inner circles -->
+  <circle cx="500" cy="500" r="450" class="mainCircles outercircle" />
+  <circle cx="500" cy="500" r="300" class="mainCircles innercircle" />
+  <!-- Center text -->
+  <text x="500" y="500" class="centerText">DUSU</text>
+  <!-- Top-left Hindi -->
+  <text class="arcText" dominant-baseline="middle">
+    <textPath href="#textCirclePath" startOffset="78%" text-anchor="middle">दिल्ली विश्‍वविद्यालय छात्र संघ</textPath>
+  </text>
+  <!-- Top-right English -->
+  <text class="arcText" dominant-baseline="middle">
+    <textPath href="#textCirclePath" startOffset="22%" text-anchor="middle">Delhi University Students' Union</textPath>
+  </text>
+  <!-- Bottom motto, using reversed path for correct letter placement -->
+<text class="arcText" dominant-baseline="middle">
+  <textPath href="#reverseTextCirclePath" startOffset="50%" text-anchor="middle">
+    सेवा ऐक्यं वीर्यम्
+  </textPath>
+</text>
+<use href="#starSymbol" class="star"
+     transform="translate(500,500) rotate(0) translate(0,-375)" />
+<!-- Bottom-right (5 o’clock) -->
+<use href="#starSymbol" class="star"
+     transform="translate(500,500) rotate(150) translate(0,-375)"/>
+<!-- Bottom-left (7 o’clock) -->
+<use href="#starSymbol" class="star"
+     transform="translate(500,500) rotate(210) translate(0,-375)" />
+</svg>

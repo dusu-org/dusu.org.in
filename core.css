@@ -1,0 +1,21 @@
+.heading {
+    font-weight: bolder;
+    font-size: larger;
+}
+.mynavbar{
+    background-color: #800000;
+}
+.independenceDay {
+    border: #800000 solid 2px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+}
+.notice {
+
+    border: #800000 solid 2px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+
+}
