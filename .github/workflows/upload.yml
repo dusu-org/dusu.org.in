@@ -1,0 +1,42 @@
+name: Upload Files to S3
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6.0.2
+      - name: Setup Node.js
+        uses: actions/setup-node@v6.3.0
+        with:
+          node-version: '24'
+      - name: Configure AWS credentials
+        id: creds
+        uses: aws-actions/configure-aws-credentials@v6.1.0
+        with:
+          role-to-assume: ${{secrets.AWS_ROLE_ARN}}
+          role-session-name: ${{ github.run_id }}-${{ github.job }}-${{ github.run_attempt }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          output-credentials: true
+          output-env-credentials: false
+          role-duration-seconds: 7200
+      - name: Run Upload Script
+        run: node -v
+        env:
+          AWS_REGION: ${{secrets.AWS_REGION}}
+          AWS_DEFAULT_REGION: ${{secrets.AWS_DEFAULT_REGION}}
+          AWS_ACCOUNT_ID: ${{secrets.AWS_ACCOUNT_ID}}
+          AWS_ACCESS_KEY_ID: ${{ steps.creds.outputs.aws-access-key-id }}
+          AWS_SECRET_ACCESS_KEY: ${{ steps.creds.outputs.aws-secret-access-key }}
+          AWS_SESSION_TOKEN: ${{ steps.creds.outputs.aws-session-token }}
+          S3_BUCKET_NAME: ${{secrets.S3_BUCKET_NAME}}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
